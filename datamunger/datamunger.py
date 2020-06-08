@@ -11,7 +11,7 @@ import sys
 # python3 datamunger.py see.csv
 # gets data from same directory
 
-origin=sys.argv[1]
+origin=""
 
 def calc_total(curr):
     computed=0
@@ -47,24 +47,29 @@ def check_row(n, prev, curr_str):
 
 
 
+def datamungerMain():
+    if "http" in origin:
+       ctx = ssl._create_unverified_context()
+       inp = urllib.request.urlopen(origin, context=ctx)
+       def get_text(x):  # for URL we need to convert from byte to string
+           return x.decode('utf-8')
+    else:
+        inp = open(origin)
+        def get_text(x): # does nothing in case of local files
+            return x
+    inp.readline() # skip the header
+    prev = [0,0,0,0,0,0,0,0,0,0]
+    missing=0
+    n=1
+    for  line in inp:
+         n=n+1
+         str_vals  = get_text(line).strip().split(",")
+         ok = check_row(n,prev,str_vals)
+         if not ok:
+             missing = missing+1
+    print("There were ",missing," missing lines")
 
-if "http" in origin:
-   ctx = ssl._create_unverified_context()
-   inp = urllib.request.urlopen(origin, context=ctx)
-   def get_text(x):  # for URL we need to convert from byte to string
-       return x.decode('utf-8')
-else:
-    inp = open(origin)
-    def get_text(x): # does nothing in case of local files
-        return x
-inp.readline() # skip the header
-prev = [0,0,0,0,0,0,0,0] #CHANGE: only need 8 entries since only columns TALL and T1-T7 need to increase monotonically
-missing=0
-n=1
-for  line in inp:
-     n=n+1
-     str_vals  = get_text(line).strip().split(",")
-     ok = check_row(n,prev,str_vals)
-     if not ok:
-         missing = missing+1
-print("There were ",missing," missing lines")
+if __name__ == "__main__":
+    origin  = sys.argv[1]
+    datamungerMain()
+
