@@ -3,7 +3,6 @@ import urllib.request
 import ssl
 import sys
 
-
 #e.g. run as
 # python3 datamunger.py https://raw.githubusercontent.com/shaze/t3020/master/data.csv
 # fetches the data from the repo
@@ -15,7 +14,7 @@ origin=sys.argv[1]
 
 def calc_total(curr):
     computed=0
-    for c in curr[1:9]: #E1 Corrected the range
+    for c in curr[1:9]: #CHANGE: E1 Corrected the range
         computed=computed+c
     return computed
 
@@ -24,7 +23,7 @@ def check_monotonic(prev,curr):
    # Now check monotonicity and update  prev so next time round we compare
    # against this row
     for i in range(8): #CHANGE: Range changed since T8 does not need to be monotonic
-        if curr[i] <  prev[i]:  #E2 removed "=" since entries can be equal
+        if curr[i] <  prev[i]:  #CHANGE: E2 removed "=" since entries can be equal
             print("Monotonic error at column %d comparing lines %d and %d  "%(i,n-1,n),
                      "values %d and %d"%(curr[i],prev[i]))
         prev[i]=curr[i]  
@@ -32,7 +31,7 @@ def check_monotonic(prev,curr):
 
 def check_row(n, prev, curr_str):
     curr = []
-    for c in range(9): #E3 only need to check for values in TALL and T1-T8 columns (not the OTHER column)
+    for c in range(9): #CHANGE: E3 only need to check for values in TALL and T1-T8 columns (not the OTHER column)
         try:
             v = int(curr_str[c])
             curr.append(v)
