@@ -1,8 +1,8 @@
 
 # T3020   Repo for ELEN3020
 
-Name: Scott Hazelhurst
-Date: 7 June
+Name: Jesse van der Merwe
+Date: 8 June
 
 
 # Description of code -- for question 1.1 and 1.2
