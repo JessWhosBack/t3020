@@ -1,5 +1,3 @@
-#TESTING 
-
 import urllib
 import urllib.request
 import ssl
@@ -17,7 +15,7 @@ origin=sys.argv[1]
 
 def calc_total(curr):
     computed=0
-    for c in curr[2:9]: #E1
+    for c in curr[1:9]: #E1 Corrected the range
         computed=computed+c
     return computed
 
@@ -25,19 +23,18 @@ def calc_total(curr):
 def check_monotonic(prev,curr):
    # Now check monotonicity and update  prev so next time round we compare
    # against this row
-    for i in range(9):
-        if curr[i] <=  prev[i]:  #E2
+    for i in range(8): #CHANGE: Range changed since T8 does not need to be monotonic
+        if curr[i] <  prev[i]:  #E2 removed "=" since entries can be equal
             print("Monotonic error at column %d comparing lines %d and %d  "%(i,n-1,n),
                      "values %d and %d"%(curr[i],prev[i]))
         prev[i]=curr[i]  
 
 
 def check_row(n, prev, curr_str):
-    data = []
     curr = []
-    for d in curr_str: #E3
+    for c in range(9): #E3 only need to check for values in TALL and T1-T8 columns (not the OTHER column)
         try:
-            v = int(d)
+            v = int(curr_str[c])
             curr.append(v)
         except ValueError:  # missing data so can't convert
             return False
@@ -61,7 +58,7 @@ else:
     def get_text(x): # does nothing in case of local files
         return x
 inp.readline() # skip the header
-prev = [0,0,0,0,0,0,0,0,0,0]
+prev = [0,0,0,0,0,0,0,0] #CHANGE: only need 8 entries since only columns TALL and T1-T7 need to increase monotonically
 missing=0
 n=1
 for  line in inp:
