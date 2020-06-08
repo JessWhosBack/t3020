@@ -2,7 +2,7 @@ import urllib
 import urllib.request
 import ssl
 import sys
-
+print("Scott was here")
 #e.g. run as
 # python3 datamunger.py https://raw.githubusercontent.com/shaze/t3020/master/data.csv
 # fetches the data from the repo
