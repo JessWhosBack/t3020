@@ -20,3 +20,58 @@ Note, however, there is some missing data in some of the rows. The first few lin
 ### Errors
 
 There are three deliberate errors, marked E1, E2 and E3. Finding other (non-deliberate and unknown to me)  errors will get a bonus -- clearly add below this line in your copy of the README what the errors are and how you fixed them.
+
+
+## Errors Found
+### ERROR 1
+    for c in curr[2:9]: #E1
+
+This line loops through the numbers stored in the curr array. However, these numbers are from the columns of the table, of which we need to add only columns T1 through T8 (inclusive). These are columns 1 and 8 respectively. Thus, this line should rather be: 
+
+    for c in curr[1:9]:
+
+### ERROR 2
+    if curr[i] <=  prev[i]:  #E2
+
+This line checks for monotonicity, however it is okay for the two fields to have the SAME value.
+Thus, the line should rather be: 
+
+    if curr[i] < prev[i]
+
+### ERROR 3
+    for d in curr_str: #E3
+        try:
+            v = int(d)
+
+These line checks for missing data in all of the columns, however, it doesn't matter if there is missing data in the "OTHER" column.
+This was therefore changed to only check for values in the TALL and T1-T8 columns: 
+    
+    for c in range(9): #E3
+        try:
+            v = int(curr_str[c])
+
+
+### OTHER CHANGES
+line 26:             for i in range(9) 
+Was changed to:      for i in range(8)
+Since column T8 does not need to be monotonic, and therefore shouldn't be checked
+
+The prev array only needs 8 entries, since only columns TALL and T1 - T7 need to be monotonic. 
+
+Line 61 was therefore changed from: 
+    prev = [0,0,0,0,0,0,0,0,0,0]
+To:
+    prev = [0,0,0,0,0,0,0,0]
+
+
+
+
+
+
+
+
+
+
+
+
+
