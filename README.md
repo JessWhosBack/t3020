@@ -63,10 +63,20 @@ Line 61 was therefore changed from:
 To:
     prev = [0,0,0,0,0,0,0,0]
 
+### CHANGES TO FACILITATE TESTING
+Added the following two functions:
 
+    if __name__ == "__main__":
 
+    def datamungerMain(inp, warning_total, warning_mono):
 
+The first function only runs if the user is running the program (as apposed to a unittest being performed on it). If this is the case, then the program looks for the second argument in the terminal line (that opens the correct data.csv file). 
 
+The second function is called by the datamunger.py script automatically when the user runs it, OR is called by the unittest functions manually. This allows the unittests to access the other functions and functionality of the script. 
+
+The datamungerMain function now returns the amount of lines that are missing entries and True if there are no missing entries. The program can now simply print this result with the appropriate text. This makes testing a lot easier as the number of missing entries can be compared immediately.
+
+I have added a few arrays (namely warning_total, warning_mono) to store the results - instead of printing them directly to the console. This makes testing a lot easier, and is better coding practice in general (in case the user wants to store the results instead of just printing them. 
 
 
 
