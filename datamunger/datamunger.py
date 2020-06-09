@@ -31,7 +31,6 @@ def check_monotonic(prev,curr, n, warning_mono):
             warning_mono.append(message)
         prev[i]=curr[i]  
 
-
 def check_row(n, prev, curr_str, warning_total, warning_mono):
     curr = []
     for c in range(9): #CHANGE: E3 only need to check for values in TALL and T1-T8 columns (not the OTHER column)
@@ -46,8 +45,6 @@ def check_row(n, prev, curr_str, warning_total, warning_mono):
         warning_total.append(warningMessageTotal)
     check_monotonic(prev, curr, n, warning_mono)
     return True # if there all data was there
-
-
 
 def datamungerMain(inp, warning_total, warning_mono):
     def get_text(x): # does nothing in case of local files

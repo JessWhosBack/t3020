@@ -5,7 +5,6 @@ import unittest
 import datamunger
 import os
 
-
 this_dir = os.path.dirname(__file__)
 
 class MainUnitTest(unittest.TestCase):
