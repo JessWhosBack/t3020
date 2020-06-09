@@ -1,3 +1,6 @@
+#Jesse van der Merwe
+#1829172
+#9 June
 import urllib
 import urllib.request
 import ssl

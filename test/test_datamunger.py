@@ -1,4 +1,6 @@
-#Setup for unit tests
+#Jesse van der Merwe
+#1829172
+#9 June
 import unittest
 import datamunger
 import os
